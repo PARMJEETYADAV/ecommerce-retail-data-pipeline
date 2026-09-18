@@ -1,0 +1,96 @@
+# Data Warehouse Configuration File
+# This file contains centralized configuration for the E-commerce Data Warehouse project
+
+# Database Configuration
+database:
+  staging:
+    schema: "staging"
+    connection_id: "postgres_staging"
+  warehouse:
+    schema: "warehouse"
+    connection_id: "postgres_warehouse"
+
+# Date Dimension Configuration
+date_dimension:
+  start_date: "2016-01-01"
+  end_date: "2025-12-31"
+
+# SCD Configuration
+scd:
+  type_2_end_date_years: 10 # Number of years for future end_date (9999 replacement)
+
+# Data Quality Thresholds
+data_quality:
+  min_rows:
+    dim_customers: 1000
+    dim_products: 100
+    dim_sellers: 100
+    dim_geolocation: 100
+    fact_orders: 1000
+
+  max_null_percentage: 5 # Maximum percentage of NULL values allowed
+
+# Transformation Settings
+transformation:
+  zip_code_length: 5
+  batch_size: 10000 # For future incremental loading
+
+# Logging Configuration
+logging:
+  level: "INFO" # Options: DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# Airflow DAG Configuration
+airflow:
+  dag_id: "e_commerce_dw_etl"
+  schedule_interval: "@daily"
+  default_retries: 1
+  retry_delay_minutes: 5
+  email_on_failure: false
+  email_on_retry: false
+
+# Business Rules
+business_rules:
+  valid_order_statuses:
+    - "delivered"
+    - "shipped"
+    - "canceled"
+    - "unavailable"
+    - "invoiced"
+    - "processing"
+    - "approved"
+
+  valid_payment_types:
+    - "credit_card"
+    - "boleto"
+    - "voucher"
+    - "debit_card"
+
+  brazilian_states:
+    - "AC" # Acre
+    - "AL" # Alagoas
+    - "AP" # Amapá
+    - "AM" # Amazonas
+    - "BA" # Bahia
+    - "CE" # Ceará
+    - "DF" # Distrito Federal
+    - "ES" # Espírito Santo
+    - "GO" # Goiás
+    - "MA" # Maranhão
+    - "MT" # Mato Grosso
+    - "MS" # Mato Grosso do Sul
+    - "MG" # Minas Gerais
+    - "PA" # Pará
+    - "PB" # Paraíba
+    - "PR" # Paraná
+    - "PE" # Pernambuco
+    - "PI" # Piauí
+    - "RJ" # Rio de Janeiro
+    - "RN" # Rio Grande do Norte
+    - "RS" # Rio Grande do Sul
+    - "RO" # Rondônia
+    - "RR" # Roraima
+    - "SC" # Santa Catarina
+    - "SP" # São Paulo
+    - "SE" # Sergipe
+    - "TO" # Tocantins

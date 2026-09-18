@@ -1,0 +1,15 @@
+# Core Data Processing
+pandas==1.5.3
+
+# Airflow Providers
+apache-airflow-providers-mysql
+apache-airflow-providers-celery>=3.3.0
+apache-airflow-providers-postgres
+
+# Additional Dependencies
+google-api-python-client
+Unidecode
+openpyxl
+
+# Configuration Management
+PyYAML>=6.0
